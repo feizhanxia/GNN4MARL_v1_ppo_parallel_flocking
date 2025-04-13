@@ -1,0 +1,32 @@
+# Core libraries
+
+# PyTorch dependencies: https://pytorch.org
+# torch
+# torchvision
+# torchaudio
+
+# PyTorch Geometric (for GNN)
+# PyG dependencies: https://pytorch-geometric.readthedocs.io/en/latest/install/installation.html
+# torch-geometric
+# torch-scatter
+# torch-sparse
+# torch-cluster
+# torch-spline-conv
+
+# Reinforcement Learning
+tensorboard
+scipy
+
+# Visualization
+matplotlib
+
+# Utilities
+numpy
+tqdm
+pyyaml
+
+# For CLI training args (optional but useful)
+argparse
+
+# (Optional for animation encoding)
+ffmpeg-python

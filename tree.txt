@@ -1,0 +1,42 @@
+.
+├── agents
+│   ├── __init__.py
+│   ├── parallel_policy_ac.py
+│   ├── policy_base.py
+│   ├── random_policy.py
+│   └── vicsek_policy.py
+├── env
+│   ├── __init__.py
+│   ├── base_env.py
+│   ├── README.md
+│   └── reward_env.py
+├── test
+│   ├── test_compare_parallel.py
+│   ├── test_parallel_gnn_policy.py
+│   ├── test_random_policy.py
+│   └── test_vicsek_policy.py
+├── test_results
+│   ├── compare_rewards.png
+│   ├── flock_animation.mp4
+│   ├── gnn_animation.mp4
+│   ├── random_animation.mp4
+│   └── vicsek_animation.mp4
+├── trainers
+│   ├── __init__.py
+│   └── parallel_ppo_trainer.py
+├── training_logs_parallel
+├── utils
+│   ├── __init__.py
+│   ├── evaluation_utils.py
+│   ├── parallel_buffer.py
+│   ├── seed.py
+│   ├── training_utils.py
+│   └── visualization_utils.py
+├── README_CN.md
+├── README.md
+├── requirements.txt
+├── train_parallel_ppo_run.sh
+├── train_parallel_ppo.py
+└── tree.txt
+
+8 directories, 32 files
