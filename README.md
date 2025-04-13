@@ -1,6 +1,7 @@
 # **🧠 Equivariant RL Swarm — Parallel PPO for Collective Behavior**
 [简体中文](README_CN.md) | [English](README.md)
 
+![image](./image.png)
 
 A modular reinforcement learning framework for learning collective behavior (e.g. flocking) with GNN-based policies, Vicsek models, and random baselines. Designed with parallel sampling, visual diagnostics, stable PPO training, and swarm physics in mind — built for researchers and tinkerers alike.
 
@@ -8,7 +9,7 @@ A modular reinforcement learning framework for learning collective behavior (e.g
 ## **📁 Project Structure**
 
 ```zsh
-tree --dirsfirst -I "*.pt|*.0|__pycache__|run*" -n -o tree.txt
+tree --dirsfirst -I "*.pt|*.0|__pycache__|run*|image.png" -n -o tree.txt
 ```
 
 ```

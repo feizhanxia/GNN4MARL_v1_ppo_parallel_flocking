@@ -1,6 +1,8 @@
 # **🧠 Equivariant RL Swarm — Parallel PPO for Collective Behavior**
 [简体中文](README_CN.md) | [English](README.md)
 
+![image](./image.png)
+
 
 一个面向群体智能（flocking/swarming）任务的强化学习平台，支持基于 GNN 的策略学习、Vicsek 模型比较、多进程并行采样、粒子系统模拟和可视化。项目结构清晰、模块独立、调试友好，适合研究者在此基础上构建更复杂的群体感知与控制模型。
 
@@ -8,7 +10,7 @@
 ## **📁 项目结构**
 
 ```zsh
-tree --dirsfirst -I "*.pt|*.0|__pycache__|run*" -n -o tree.txt
+tree --dirsfirst -I "*.pt|*.0|__pycache__|run*|image.png" -n -o tree.txt
 ```
 
 ```
