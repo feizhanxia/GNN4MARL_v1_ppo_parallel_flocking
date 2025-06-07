@@ -6,6 +6,7 @@ BOX_SIZE=10.0
 RADIUS=1.5
 DT=0.2
 SPEED=1.0
+PHYSICS_STEPS=5  # 新增：每个动作之间的物理更新步数
 
 # 🧠 Model config
 HIDDEN_DIM=8
@@ -23,7 +24,7 @@ ENT_COEF=1e-3
 EPOCHS=1
 
 # 🧪 Training config
-EPISODES=5000
+EPISODES=100
 STEPS_PER_EP=250
 CKPT_INTERVAL=200
 SEED=36
@@ -36,7 +37,7 @@ EVAL_EPISODES=10
 N_WORKERS=10  # 并行采样工作进程数
 
 # 💻 System
-DEVICE=cuda  # or 'cpu'
+DEVICE=cpu  # or 'cpu'
 SAVE_ROOT=training_logs_parallel  # 使用不同的保存目录
 
 python train_parallel_ppo.py \
@@ -45,6 +46,7 @@ python train_parallel_ppo.py \
   --radius $RADIUS \
   --dt $DT \
   --speed $SPEED \
+  --physics_steps $PHYSICS_STEPS \
   --hidden_dim $HIDDEN_DIM \
   --std $STD \
   --min_std $MIN_STD \
@@ -64,4 +66,4 @@ python train_parallel_ppo.py \
   --seed $SEED \
   --eval_interval $EVAL_INTERVAL \
   --eval_episodes $EVAL_EPISODES \
-  --n_workers $N_WORKERS 
+  --n_workers $N_WORKERS

@@ -14,10 +14,10 @@ from trainers.parallel_ppo_trainer import ParallelPPOTrainer
 from utils.seed import set_seed
 from utils.training_utils import setup_training_directory, save_model, update_learning_rate
 from utils.evaluation_utils import Evaluator
-from utils.visualization_utils import plot_reward_curve
+# from utils.visualization_utils import plot_reward_curve
 
 # 全局变量用于存储奖励历史
-reward_history = []
+# reward_history = []
 
 def signal_handler(sig, frame):
     """处理中断信号"""
@@ -33,7 +33,8 @@ def worker_func(worker_id, args, policy_state_dict, sample_queue, stop_event):
             box_size=args.box_size,
             radius=args.radius,
             dt=args.dt,
-            speed=args.speed
+            speed=args.speed,
+            physics_steps=args.physics_steps  # 新增
         )
         
         # 创建本地策略网络
@@ -248,7 +249,7 @@ def run_parallel_ppo_training(args):
             std_action = batch['actions'].std().item()
             
             # 记录训练信息
-            reward_history.append(avg_reward)
+            # reward_history.append(avg_reward)
             writer.add_scalar("Loss/Total", total_loss, ep)
             writer.add_scalar("Loss/Policy", policy_loss, ep)
             writer.add_scalar("Loss/Value", value_loss, ep)
@@ -298,7 +299,7 @@ def run_parallel_ppo_training(args):
         {'in_dim': in_dim, 'hidden_dim': args.hidden_dim, 'std': args.std},
         "policy_final.pt"
     )
-    plot_reward_curve(reward_history, save_dir, args.episodes)
+    # plot_reward_curve(reward_history, save_dir, args.episodes)
     writer.close()
     print("\n✅ Training complete. Final model saved.")
 
@@ -309,6 +310,7 @@ if __name__ == "__main__":
     parser.add_argument("--radius", type=float, default=1.0)
     parser.add_argument("--dt", type=float, default=0.1)
     parser.add_argument("--speed", type=float, default=1.0)
+    parser.add_argument("--physics_steps", type=int, default=1)  # 新增
     parser.add_argument("--hidden_dim", type=int, default=64)
     parser.add_argument("--std", type=float, default=0.1)
     parser.add_argument("--min_std", type=float, default=1e-5)
@@ -330,5 +332,5 @@ if __name__ == "__main__":
     parser.add_argument("--eval_episodes", type=int, default=10, help="评估次数")
     parser.add_argument("--n_workers", type=int, default=4, help="并行采样工作进程数")
     args = parser.parse_args()
-
-    run_parallel_ppo_training(args) 
+    
+    run_parallel_ppo_training(args)

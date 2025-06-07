@@ -1,7 +1,6 @@
 import torch
 import torch.nn.functional as F
 from torch.optim import Adam
-from utils.parallel_buffer import ParallelBuffer
 
 class ParallelPPOTrainer:
     def __init__(self, policy, gamma=0.99, lam=0.95, lr=1e-3, radius=1.0,
@@ -16,7 +15,6 @@ class ParallelPPOTrainer:
         self.radius = radius
         
         self.optimizer = Adam(policy.parameters(), lr=lr)
-        self.buffer = ParallelBuffer()
     
     def compute_gae(self, rewards, values, dones):
         """计算广义优势估计"""

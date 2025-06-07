@@ -13,12 +13,14 @@ class Evaluator:
         self.best_reward = float('-inf')
         
     def create_eval_env(self):
+        """创建评估环境"""
         return FlockingEnv(
             n_agents=self.args.n_agents,
             box_size=self.args.box_size,
             radius=self.args.radius,
             dt=self.args.dt,
-            speed=self.args.speed
+            speed=self.args.speed,
+            physics_steps=self.args.physics_steps  # 新增
         )
     
     def evaluate_policy(self, n_episodes=10):
@@ -55,34 +57,3 @@ class Evaluator:
                 self.best_reward = avg_reward
                 best_reward_queue.put((avg_reward, self.policy.state_dict()))
                 print(f"🎉 新的最佳模型！平均奖励: {avg_reward:.4f}")
-
-def rollout_episode(env, policy, trainer, device, args):
-    """执行一个episode的rollout"""
-    obs = env.reset()
-    
-    for step in range(args.steps_per_ep):
-        x = torch.cat([obs['pos'], obs['vel']], dim=-1).to(device)
-        edge_index = obs['edge_index'].to(device)
-        
-        action, log_prob, value = policy.act(x, edge_index)
-        obs, reward = env.step(action.detach().cpu())
-        
-        trainer.buffer.store(
-            x.cpu(), 
-            action.cpu(), 
-            log_prob.cpu(), 
-            reward.cpu(), 
-            value.squeeze(-1).cpu(), 
-            done=torch.zeros_like(reward).cpu()
-        )
-    
-    data = trainer.buffer.get_tensors(device)
-    rewards = data['rewards'].view(-1)
-    actions = data['actions'].view(-1, 1)
-    
-    total_reward = rewards.sum().item()
-    avg_reward = total_reward / (args.steps_per_ep * args.n_agents)
-    avg_action = actions.mean().item()
-    std_action = actions.std().item()
-    
-    return avg_reward, avg_action, std_action 
