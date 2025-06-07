@@ -4,9 +4,9 @@
 N_AGENTS=40
 BOX_SIZE=10.0
 RADIUS=1.5
-DT=0.2
+DT=0.1
 SPEED=1.0
-PHYSICS_STEPS=5  # 新增：每个动作之间的物理更新步数
+PHYSICS_STEPS=10  # 新增：每个动作之间的物理更新步数
 
 # 🧠 Model config
 HIDDEN_DIM=8
@@ -24,8 +24,8 @@ ENT_COEF=1e-3
 EPOCHS=1
 
 # 🧪 Training config
-EPISODES=100
-STEPS_PER_EP=250
+EPISODES=500
+STEPS_PER_EP=500
 CKPT_INTERVAL=200
 SEED=36
 
@@ -34,11 +34,11 @@ EVAL_INTERVAL=100
 EVAL_EPISODES=10
 
 # 🔄 Parallel config
-N_WORKERS=10  # 并行采样工作进程数
+N_WORKERS=50  # 并行采样工作进程数
 
 # 💻 System
 DEVICE=cpu  # or 'cpu'
-SAVE_ROOT=training_logs_parallel  # 使用不同的保存目录
+SAVE_ROOT=training_logs
 
 python train_parallel_ppo.py \
   --n_agents $N_AGENTS \
