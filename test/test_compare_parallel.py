@@ -22,6 +22,7 @@ def parse_args():
     parser.add_argument("--save_animation", action="store_true")
     parser.add_argument("--save_dir", type=str, default="test_results")
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
+    parser.add_argument("--physics_steps", type=int, default=1)  # 新增
     return parser.parse_args()
 
 def create_animation_single(positions, velocities, box_size, radius, policy_name, save_path=None):
@@ -214,6 +215,7 @@ if __name__ == "__main__":
         'box_size': 10.0,
         'radius': 1.5,
         'dt': 0.05,
-        'speed': 1.0
+        'speed': 1.0,
+        'physics_steps': 5  # 新增，或者从命令行参数获取
     }
-    main(env_args) 
+    main(env_args)

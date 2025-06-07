@@ -6,8 +6,8 @@ import torch.nn.functional as F
 
 
 class FlockingEnv(SwarmBaseEnv):
-    def __init__(self, n_agents=50, box_size=10.0, radius=1.0, dt=0.1, speed=0.05):
-        super().__init__(n_agents, box_size, radius, dt, speed)
+    def __init__(self, n_agents=50, box_size=10.0, radius=1.0, dt=0.1, speed=0.05, physics_steps=1):
+        super().__init__(n_agents, box_size, radius, dt, speed, physics_steps)
         self.last_angle_delta = None
 
     def step(self, angle_delta):

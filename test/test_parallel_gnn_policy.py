@@ -22,6 +22,8 @@ def parse_args():
     parser.add_argument("--save_animation", action="store_true")
     parser.add_argument("--save_dir", type=str, default="test_results")
     parser.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
+    # 环境参数
+    parser.add_argument("--physics_steps", type=int, default=1)  # 新增
     
     return parser.parse_args()
 
@@ -156,7 +158,8 @@ def main():
             'box_size': 5.0,
             'radius': 3.0,
             'dt': 0.05,
-            'speed': 1.0
+            'speed': 1.0,
+            'physics_steps': args.physics_steps  # 新增
         }
     
     # 创建环境
@@ -165,7 +168,8 @@ def main():
         box_size=env_config.get('box_size', 10.0),
         radius=env_config.get('radius', 1.5),
         dt=env_config.get('dt', 0.05),
-        speed=env_config.get('speed', 1.0)
+        speed=env_config.get('speed', 1.0),
+        physics_steps=env_config.get('physics_steps', args.physics_steps)  # 新增
     )
     
     # 创建策略网络
@@ -228,4 +232,4 @@ def main():
         plt.close()
 
 if __name__ == "__main__":
-    main() 
+    main()
